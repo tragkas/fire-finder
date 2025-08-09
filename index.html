@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <title>Χάρτης Πρόληψης Φωτιάς - Φωτιά Τώρα</title>
+  <meta name="description" content="Ενημερωθείτε άμεσα για τις περιοχές πρόληψης φωτιάς στην Ελλάδα. Χάρτης και πληροφορίες σε πραγματικό χρόνο. Φωτιά Τώρα." />
+  <meta name="keywords" content="Φωτιά, Φωτιά Τώρα, Πρόληψη Φωτιάς, Χάρτης Φωτιάς, Πυρκαγιά, Ελλάδα" />
+  <meta name="author" content="Your Company or Name" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center p-4">
+
+  <h1 class="text-2xl font-bold mb-4">🔥 Τοποθεσίες Φωτιάς Τώρα</h1>
+
+  <!-- Filter Dropdown -->
+  <div class="mb-4 w-full max-w-md">
+    <label for="filter" class="block mb-2 font-medium">Φιλτράρισμα κατά Περιοχή:</label>
+    <select id="filter" class="w-full border border-gray-300 rounded p-2">
+      <option value="">Όλες οι Περιοχές</option>
+    </select>
+  </div>
+
+  <!-- Submit Area Button -->
+  <div class="mb-6 w-full max-w-md flex justify-center">
+    <button
+      id="submitAreaBtn"
+      class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded shadow transition duration-200"
+      type="button"
+    >
+      Βρήκες Φωτιά; 🔥 → Βάλε το Google Map Link
+    </button>
+  </div>
+
+  <!-- Feed Container -->
+  <div id="feed" class="w-full max-w-md overflow-y-auto space-y-4" style="max-height: 80vh;"></div>
+
+  <script>
+    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRLvoe1WBcbq_CXcqUd4HKtBb_bI7Al0jdpTLxvnChrsmYzmLgXGOZb0bSKgZ-LsjI4c_jX2EPbylIA/pub?output=csv';
+
+    const AREA_COL = 'Γράψε την Περιοχή';
+    const MAP_COL = 'Βάλε το Google Map Link';
+    const TIME_COL = 'Timestamp'; // Βεβαιώσου ότι υπάρχει αυτή η στήλη στο CSV
+
+    let entries = [];
+
+    // Parse CSV into objects
+    function parseCSV(csv) {
+      const rows = csv.trim().split('\n').map(r => r.split(','));
+      const headers = rows.shift().map(h => h.trim());
+      return rows.map(row => {
+        let obj = {};
+        headers.forEach((h, i) => obj[h] = row[i]?.trim() || '');
+        return obj;
+      });
+    }
+
+    // Convert Google Maps share URL to embed URL
+    function toEmbedUrl(url) {
+      if (!url) return '';
+
+      if (url.includes('<iframe')) {
+        const match = url.match(/src="([^"]+)"/);
+        return match ? match[1] : '';
+      }
+
+      try {
+        const u = new URL(url);
+
+        if (u.hostname.includes('google.com')) {
+          if (u.pathname.startsWith('/maps/embed')) {
+            return url;
+          }
+          if (u.pathname.startsWith('/maps')) {
+            // Αυτό το embed απαιτεί API key, οπότε δεν το χρησιμοποιούμε εδώ.
+            return '';
+          }
+        }
+      } catch(e) {}
+
+      return '';
+    }
+
+    // Format timestamp nicely (Greek locale)
+    function formatTimestamp(ts) {
+      if (!ts) return '';
+      const d = new Date(ts);
+      if (isNaN(d)) return ts;
+      return d.toLocaleString('el-GR', {
+        year: 'numeric', month: 'short', day: 'numeric',
+        hour: '2-digit', minute: '2-digit'
+      });
+    }
+
+    // Render feed
+    function renderFeed(filterValue = '') {
+      const feed = document.getElementById('feed');
+      feed.innerHTML = '';
+
+      let filtered = filterValue ? entries.filter(e => e[AREA_COL] === filterValue) : entries;
+
+      filtered.forEach(entry => {
+        const areaName = entry[AREA_COL] || 'Άγνωστη Περιοχή';
+        const mapLinkRaw = entry[MAP_COL] || '';
+        const timestamp = entry[TIME_COL] || '';
+
+        const embedUrl = toEmbedUrl(mapLinkRaw);
+
+        const defaultMapImage = 
+          `<img src="https://v.wpimg.pl/OTI5NjM5YDUoVzhZYk5tIGsPbAMkF2N2PBd0SGIMfGwxAHxSYlMmOCxHKxoiGygmPEUvHT0bPzhmVD4DYkN-ey1cPRohVDZ7LFgsDykaLGB-USoMe1BiYn0EKEd5B31jZFQvDy8Ye2VwU3dYdAN8bX9XbBc" alt="Προεπιλεγμένος χάρτης" class="w-full h-48 object-cover rounded" />`;
+
+        const mapEmbed = embedUrl
+          ? `<iframe src="${embedUrl}" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>`
+          : defaultMapImage;
+
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-lg shadow p-4 cursor-pointer hover:shadow-lg transition duration-200';
+
+        card.onclick = () => {
+          if (mapLinkRaw) window.open(mapLinkRaw, '_blank', 'noopener');
+        };
+
+        card.innerHTML = `
+          <h2 class="text-lg font-bold mb-1 text-blue-600 hover:underline">${areaName}</h2>
+          <p class="text-xs text-gray-500 mb-2">${formatTimestamp(timestamp)}</p>
+          <div class="mb-2">${mapEmbed}</div>
+        `;
+
+        feed.appendChild(card);
+      });
+    }
+
+    // Populate filter options
+    function populateFilterOptions() {
+      const filter = document.getElementById('filter');
+      const areas = [...new Set(entries.map(e => e[AREA_COL]).filter(Boolean))];
+      areas.forEach(area => {
+        const opt = document.createElement('option');
+        opt.value = area;
+        opt.textContent = area;
+        filter.appendChild(opt);
+      });
+    }
+
+    // Fetch and initialize
+    fetch(csvUrl)
+      .then(res => res.text())
+      .then(csv => {
+        entries = parseCSV(csv);
+
+        entries.sort((a, b) => new Date(b[TIME_COL]) - new Date(a[TIME_COL]));
+
+        populateFilterOptions();
+        renderFeed();
+      });
+
+    // Filter change event
+    document.getElementById('filter').addEventListener('change', (e) => {
+      renderFeed(e.target.value);
+    });
+
+    // Submit Area button click event
+    document.getElementById('submitAreaBtn').addEventListener('click', () => {
+      window.open('https://docs.google.com/forms/d/e/1FAIpQLSfLZ7hjX-X0J8E7bJ_w8IF5bRxJHnxAjyefbNBs1Ru3bZIphA/viewform', '_blank', 'noopener');
+    });
+  </script>
+</body>
+</html>
