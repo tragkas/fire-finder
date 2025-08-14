@@ -35,34 +35,53 @@
 
   <!-- Cookie Consent Script (Minified) -->
   <script src="silktide-consent-manager.js"></script>
-  <script>
-    silktideCookieBannerManager.updateCookieBannerConfig({
-      background:{showBackground:true},
-      cookieIcon:{position:"bottomLeft"},
-      cookieTypes:[
-        {id:"necessary",name:"Necessary",description:"<p>These cookies are necessary for the website to function properly and cannot be switched off. They help with things like logging in and setting your privacy preferences.</p>",required:true,onAccept:()=>console.log('Necessary accepted')},
-        {id:"analytics",name:"Analytics",description:"<p>These cookies help us improve the site by tracking which pages are most popular and how visitors move around the site.</p>",required:true,onAccept:()=>console.log('Analytics accepted')},
-        {id:"advertising",name:"Advertising",description:"<p>These cookies provide extra features and personalization to improve your experience. They may be set by us or by partners whose services we use.</p>",required:true,onAccept:()=>console.log('Advertising accepted')}
-      ],
-      text:{
-        banner:{
-          description:"<p>We use cookies on our site to enhance your user experience, provide personalized content, and analyze our traffic. <a href='https://your-website.com/cookie-policy' target='_blank'>Cookie Policy.</a></p>",
-          acceptAllButtonText:"Accept all",
-          acceptAllButtonAccessibleLabel:"Accept all cookies",
-          rejectNonEssentialButtonText:"Reject non-essential",
-          rejectNonEssentialButtonAccessibleLabel:"Reject non-essential",
-          preferencesButtonText:"Preferences",
-          preferencesButtonAccessibleLabel:"Toggle preferences"
-        },
-        preferences:{
-          title:"Customize your cookie preferences",
-          description:"<p>We respect your right to privacy. You can choose not to allow some types of cookies. Your cookie preferences will apply across our website.</p>",
-          creditLinkText:"Get this banner for free",
-          creditLinkAccessibleLabel:"Get this banner for free"
-        }
+<script>
+  silktideCookieBannerManager.updateCookieBannerConfig({
+    background: { showBackground: true },
+    cookieIcon: { position: "bottomLeft" },
+    cookieTypes: [
+      {
+        id: "necessary",
+        name: "Απαραίτητα",
+        description: "<p>Αυτά τα cookies είναι απαραίτητα για τη σωστή λειτουργία της ιστοσελίδας και δεν μπορούν να απενεργοποιηθούν. Βοηθούν σε λειτουργίες όπως η είσοδος και η ρύθμιση των προτιμήσεων απορρήτου σας.</p>",
+        required: true,
+        onAccept: () => console.log('Απαραίτητα αποδεκτά')
+      },
+      {
+        id: "analytics",
+        name: "Αναλυτικά",
+        description: "<p>Αυτά τα cookies μας βοηθούν να βελτιώσουμε τον ιστότοπο παρακολουθώντας ποιες σελίδες είναι πιο δημοφιλείς και πώς οι επισκέπτες κινούνται στον ιστότοπο.</p>",
+        required: true,
+        onAccept: () => console.log('Αναλυτικά αποδεκτά')
+      },
+      {
+        id: "advertising",
+        name: "Διαφημιστικά",
+        description: "<p>Αυτά τα cookies παρέχουν επιπλέον λειτουργίες και προσωποποίηση για να βελτιώσουν την εμπειρία σας. Μπορεί να οριστούν από εμάς ή από συνεργάτες των οποίων τις υπηρεσίες χρησιμοποιούμε.</p>",
+        required: true,
+        onAccept: () => console.log('Διαφημιστικά αποδεκτά')
       }
-    });
-  </script>
+    ],
+    text: {
+      banner: {
+        description: "<p>Χρησιμοποιούμε cookies στον ιστότοπό μας για να βελτιώσουμε την εμπειρία σας, να παρέχουμε εξατομικευμένο περιεχόμενο και να αναλύουμε την κίνηση. <a href='https://your-website.com/cookie-policy' target='_blank'>Πολιτική Cookies.</a></p>",
+        acceptAllButtonText: "Αποδοχή όλων",
+        acceptAllButtonAccessibleLabel: "Αποδοχή όλων των cookies",
+        rejectNonEssentialButtonText: "Απόρριψη μη απαραίτητων",
+        rejectNonEssentialButtonAccessibleLabel: "Απόρριψη μη απαραίτητων cookies",
+        preferencesButtonText: "Προτιμήσεις",
+        preferencesButtonAccessibleLabel: "Αλλαγή προτιμήσεων"
+      },
+      preferences: {
+        title: "Προσαρμόστε τις προτιμήσεις cookies σας",
+        description: "<p>Σεβόμαστε το δικαίωμά σας στην ιδιωτικότητα. Μπορείτε να επιλέξετε να μην επιτρέψετε ορισμένους τύπους cookies. Οι προτιμήσεις σας θα εφαρμοστούν σε όλο τον ιστότοπο.</p>",
+        creditLinkText: "Λάβετε αυτό το banner δωρεάν",
+        creditLinkAccessibleLabel: "Λάβετε αυτό το banner δωρεάν"
+      }
+    }
+  });
+</script>
+
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WS695GTF9Y"></script>
