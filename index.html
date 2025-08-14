@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
+  <!-- Basic Meta Tags -->
   <meta charset="UTF-8" />
-  <title>Χάρτης Πρόληψης Φωτιάς - Φωτιά Τώρα</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Ενημερωθείτε άμεσα για τις περιοχές πρόληψης φωτιάς στην Ελλάδα. Χάρτης και πληροφορίες σε πραγματικό χρόνο. Φωτιά Τώρα." />
   <meta name="keywords" content="Φωτιά, Φωτιά Τώρα, Πρόληψη Φωτιάς, Χάρτης Φωτιάς, Πυρκαγιά, Ελλάδα" />
   <meta name="author" content="Your Company or Name" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Title -->
+  <title>Χάρτης Πρόληψης Φωτιάς - Φωτιά Τώρα</title>
 
   <!-- Open Graph for Social Sharing -->
   <meta property="og:title" content="Ενημερωθείτε άμεσα για τις περιοχές πρόληψης φωτιάς στην Ελλάδα.">
@@ -26,20 +29,51 @@
   <link rel="icon" type="image/png" sizes="192x192" href="https://twemoji.maxcdn.com/v/latest/72x72/1f525.png">
   <link rel="apple-touch-icon" href="https://twemoji.maxcdn.com/v/latest/72x72/1f525.png">
 
-
+  <!-- Stylesheets -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="path-to-css/silktide-consent-manager.css">
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WS695GTF9Y"></script>
+  <!-- Cookie Consent Script (Minified) -->
+  <script src="path-to-js/silktide-consent-manager.js"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-WS695GTF9Y');
+    silktideCookieBannerManager.updateCookieBannerConfig({
+      background:{showBackground:true},
+      cookieIcon:{position:"bottomLeft"},
+      cookieTypes:[
+        {id:"necessary",name:"Necessary",description:"<p>These cookies are necessary for the website to function properly and cannot be switched off. They help with things like logging in and setting your privacy preferences.</p>",required:true,onAccept:()=>console.log('Necessary accepted')},
+        {id:"analytics",name:"Analytics",description:"<p>These cookies help us improve the site by tracking which pages are most popular and how visitors move around the site.</p>",required:true,onAccept:()=>console.log('Analytics accepted')},
+        {id:"advertising",name:"Advertising",description:"<p>These cookies provide extra features and personalization to improve your experience. They may be set by us or by partners whose services we use.</p>",required:true,onAccept:()=>console.log('Advertising accepted')}
+      ],
+      text:{
+        banner:{
+          description:"<p>We use cookies on our site to enhance your user experience, provide personalized content, and analyze our traffic. <a href='https://your-website.com/cookie-policy' target='_blank'>Cookie Policy.</a></p>",
+          acceptAllButtonText:"Accept all",
+          acceptAllButtonAccessibleLabel:"Accept all cookies",
+          rejectNonEssentialButtonText:"Reject non-essential",
+          rejectNonEssentialButtonAccessibleLabel:"Reject non-essential",
+          preferencesButtonText:"Preferences",
+          preferencesButtonAccessibleLabel:"Toggle preferences"
+        },
+        preferences:{
+          title:"Customize your cookie preferences",
+          description:"<p>We respect your right to privacy. You can choose not to allow some types of cookies. Your cookie preferences will apply across our website.</p>",
+          creditLinkText:"Get this banner for free",
+          creditLinkAccessibleLabel:"Get this banner for free"
+        }
+      }
+    });
   </script>
 
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WS695GTF9Y"></script>
+  <script>
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js',new Date());
+    gtag('config','G-WS695GTF9Y');
+  </script>
 </head>
+
 <body class="bg-gray-100 min-h-screen flex flex-col items-center p-4">
 
   <h1 class="text-2xl font-bold mb-4">🔥 Τοποθεσίες Φωτιάς Τώρα</h1>
