@@ -48,9 +48,72 @@
       class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded shadow transition duration-200"
       type="button"
     >
-      Βρήκες Φωτιά; 🔥 → Βάλε το Google Map Link
+      🔥 Βρήκες Φωτιά; → Βάλε το Google Map Link
     </button>
   </div>
+
+  <!-- Add below the submitAreaBtn div -->
+<div class="mb-6 w-full max-w-md flex flex-col items-center">
+  <button
+    id="fireGuideBtn"
+    class="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-2 px-4 rounded shadow transition duration-200"
+    type="button"
+  >
+    🔥 Οδηγός Πρόληψης Πυρκαγιάς
+  </button>
+</div>
+
+<!-- Checklist Popup Modal -->
+<div id="guideModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
+  <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6 relative">
+    <button id="closeGuide" class="absolute top-2 right-2 text-gray-600 hover:text-gray-900">&times;</button>
+    <h2 class="text-xl font-bold mb-4">Οδηγός Πρόληψης Πυρκαγιάς</h2>
+
+    <!-- Progress Bar -->
+    <div class="w-full bg-gray-300 rounded-full h-4 mb-4">
+      <div id="progressBar" class="bg-green-500 h-4 rounded-full w-0 transition-all duration-300"></div>
+    </div>
+
+    <!-- Checklist -->
+    <div id="checklist" class="space-y-3 max-h-[60vh] overflow-y-auto">
+      <h3 class="font-semibold">1. Βασικά μέτρα πρόληψης πυρκαγιάς</h3>
+      <div>
+        <label><input type="checkbox" data-id="chk1"> Μην αφήνετε αναμμένα κεριά ή ηλεκτρικές συσκευές χωρίς επίβλεψη.</label><br>
+        <label><input type="checkbox" data-id="chk2"> Ελέγχετε τακτικά την ηλεκτρική εγκατάσταση και αποφεύγετε την υπερφόρτωση πρίζων.</label><br>
+        <label><input type="checkbox" data-id="chk3"> Μην καπνίζετε στο κρεβάτι ή σε χώρους με εύφλεκτα υλικά.</label><br>
+        <label><input type="checkbox" data-id="chk4"> Διατηρείτε τους χώρους καθαρούς από εύφλεκτα υλικά.</label><br>
+        <label><input type="checkbox" data-id="chk5"> Έχετε πυροσβεστήρα σε προσβάσιμο σημείο.</label><br>
+      </div>
+
+      <h3 class="font-semibold">2. Πώς να προστατέψω το σπίτι μου αν βρίσκεται κοντά σε δάσος</h3>
+      <div>
+        <label><input type="checkbox" data-id="chk6"> Δημιουργήστε αντιπυρική ζώνη γύρω από το σπίτι.</label><br>
+        <label><input type="checkbox" data-id="chk7"> Χρησιμοποιήστε ανθεκτικά στη φωτιά υλικά για στέγη και τοίχους.</label><br>
+        <label><input type="checkbox" data-id="chk8"> Κλείνετε καλά πόρτες και παράθυρα.</label><br>
+        <label><input type="checkbox" data-id="chk9"> Φροντίστε να υπάρχει αυτόματο σύστημα πυρόσβεσης.</label><br>
+        <label><input type="checkbox" data-id="chk10"> Έχετε σχέδιο εκκένωσης και ενημερώστε την οικογένεια.</label><br>
+      </div>
+
+      <!-- Other sections can just be displayed as info -->
+
+      <h3 class="font-semibold">3. Πώς μπορώ να συμβάλω στην πρόληψη δασικών πυρκαγιών</h3>
+      <p>Να τηρείτε τους κανονισμούς και τις απαγορεύσεις για την ανάφλεξη φωτιάς, να αποφεύγετε τα ανοιχτά τζάκια ή τις ψησταριές κοντά σε δάση, και να ενημερώνετε τις αρχές για ύποπτες δραστηριότητες.</p>
+
+      <h3 class="font-semibold">4. Τι πρέπει να κάνω αν εντοπίσω πυρκαγιά;</h3>
+      <p>Καλέστε άμεσα την Πυροσβεστική (199 ή 112). Διατηρήστε την ψυχραιμία σας, σημειώστε την ακριβή τοποθεσία και προσπαθήστε να απομακρυνθείτε από τον κίνδυνο χωρίς να θέσετε σε κίνδυνο τη ζωή σας.</p>
+
+      <h3 class="font-semibold">5. Τι πρέπει να περιλαμβάνει το σχέδιο εκκένωσης</h3>
+      <p>Προσδιορίστε ασφαλείς διαδρομές διαφυγής, σημείο συνάντησης εκτός επικίνδυνης ζώνης, και ενημερώστε όλα τα μέλη της οικογένειας για το σχέδιο. Εξασκηθείτε τακτικά.</p>
+
+      <h3 class="font-semibold">6. Προσωπικός εξοπλισμός για προστασία</h3>
+      <p>Κρατήστε σε εύκολη πρόσβαση μάσκες προστασίας από καπνό, φακούς, νερό, ρούχα ανθεκτικά στη φωτιά, και ένα μικρό κιτ πρώτων βοηθειών.</p>
+
+      <h3 class="font-semibold">7. Συμβουλές για το σπίτι και τον κήπο</h3>
+      <p>Διατηρείτε καθαρό τον κήπο από ξερά φύλλα και κλαδιά, απομακρύνετε εύφλεκτα υλικά από το σπίτι, και προτιμήστε φυτά ανθεκτικά στη φωτιά. Κλείνετε καλά πόρτες και παράθυρα σε περίπτωση πυρκαγιάς.</p>
+    </div>
+  </div>
+</div>
+
 
   <!-- Feed Container -->
   <div id="feed" class="w-full max-w-md overflow-y-auto space-y-4" style="max-height: 80vh;"></div>
@@ -183,6 +246,53 @@
     document.getElementById('submitAreaBtn').addEventListener('click', () => {
       window.open('https://docs.google.com/forms/d/e/1FAIpQLSfLZ7hjX-X0J8E7bJ_w8IF5bRxJHnxAjyefbNBs1Ru3bZIphA/viewform', '_blank', 'noopener');
     });
+
+
+  // Fire Guide button and modal functionality with progress bar
+  const fireGuideBtn = document.getElementById('fireGuideBtn');
+  const guideModal = document.getElementById('guideModal');
+  const closeGuide = document.getElementById('closeGuide');
+  const checkboxes = guideModal.querySelectorAll('input[type="checkbox"]');
+  const progressBar = document.getElementById('progressBar');
+
+  // Load saved state from localStorage
+  checkboxes.forEach(cb => {
+    const saved = localStorage.getItem(cb.dataset.id);
+    cb.checked = saved === 'true';
+  });
+
+  function updateProgress() {
+    const total = checkboxes.length;
+    const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+    const percent = Math.round((checked / total) * 100);
+    progressBar.style.width = percent + '%';
+  }
+
+  checkboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      localStorage.setItem(cb.dataset.id, cb.checked);
+      updateProgress();
+    });
+  });
+
+  updateProgress(); // initialize
+
+  fireGuideBtn.addEventListener('click', () => {
+    guideModal.classList.remove('hidden');
+    guideModal.classList.add('flex');
+  });
+
+  closeGuide.addEventListener('click', () => {
+    guideModal.classList.add('hidden');
+    guideModal.classList.remove('flex');
+  });
+
+  guideModal.addEventListener('click', (e) => {
+    if(e.target === guideModal) {
+      guideModal.classList.add('hidden');
+      guideModal.classList.remove('flex');
+    }
+  });
   </script>
 </body>
 </html>
